@@ -1,0 +1,13 @@
+.requestText {
+    color: steelblue;
+}
+.image{
+    width: 150px;
+    height: 150px;
+}
+.btn-submit{
+    height: 40px;
+    font-size: 17px;
+    width: 150px;
+    border-radius: 30px;
+}

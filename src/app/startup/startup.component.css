@@ -1,0 +1,16 @@
+.parent{
+    max-width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-behavior: smooth
+}
+.startup-content{
+    margin-top: 60px;
+}
+.btn-start{
+    height: 50px;
+    font-size: 20px;
+    width: 200px;
+    border-radius: 30px;
+}

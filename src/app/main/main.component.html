@@ -1,0 +1,80 @@
+<div class="container-fluid" style="max-width: 100%; max-height: 100%; top: 0px;">
+    <div class="d-flex" style="justify-content: center; margin-top: 10%;">
+        <img src= {{imgPlanet}} id="imagePlanet" class="rounded image" style="visibility: hidden;">
+        <div ngbDropdown class="d-inline-block" style="margin-left: 5%; margin-top: 50px;">
+            <button class="btn btn-outline-primary" id="selectPlanet" [disabled]="!isDisabled" ngbDropdownToggle>Select Planet</button>
+            <div ngbDropdownMenu aria-labelledby="selectPlanet" style="width: 150%;">
+                <div class="row">
+                    <div class="col-sm-6" style="padding-left: 25px;">Name</div>
+                    <div class="col-sm-6">Distance</div>
+                </div>
+                <hr>
+                <div *ngFor="let planet of Planets">
+                    <button ngbDropdownItem [disabled]="planet.isDisabled" (click)="pushData(planet.name, 'planet')">
+                        <div class="row">
+                            <div class="col-sm-6" style="padding-left: 0px;">{{planet.name}}</div> 
+                            <div class="col-sm-6">{{planet.distance}}</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div ngbDropdown class="d-inline-block" style="margin-left: 5%; margin-top: 50px;">
+            <button class="btn btn-outline-primary" id="selectVehicle" [disabled]="!isDisabled" ngbDropdownToggle>Select Vehicle</button>
+            <div ngbDropdownMenu aria-labelledby="selectVehicle" style="width: 220%;">
+                <div class="row">
+                    <div class="col-sm-5" style="padding-left: 25px;">Vehicle</div>
+                    <div class="col-sm-3">Units</div>
+                    <div class="col-sm-4">Range</div>
+                </div>
+                <hr>
+                <div *ngFor="let vehicle of Vehicles">
+                    <button ngbDropdownItem [disabled]="vehicle.isDisabled" (click)="pushData(vehicle.name, 'vehicle')">
+                        <div class="row">
+                            <div class="col-sm-5" style="padding-left: 0px;">{{vehicle.name}}</div>
+                            <div class="col-sm-3">{{vehicle.total_no}}</div>
+                            <div class="col-sm-4">{{vehicle.max_distance}}</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <img src= {{imgVehicle}} id="imageVehicle" class="rounded image" style="visibility: hidden; margin-left: 5%;">
+    </div>
+    <div class="d-flex" style="justify-content: center; margin-top: 1%">
+        <label class="requestText" style="text-align: center;">Time taken: {{timeTaken}}</label>
+    </div>
+    <div class="d-flex" style="justify-content: center; margin-top: 2%">
+        <div>
+            <button class="btn btn-dark" type="submit" (click)="onAdd()">Add current selection</button>
+        </div>
+        <div>
+            <button class="btn btn-dark" type="submit" (click)="resetSelection()" style="margin-left: 50px;">Reset current selection</button>
+        </div>
+        <div>
+            <label></label>
+        </div>
+    </div>
+    <h1 class="requestText" style="text-align: center; margin-top: 3%;">Selected Planet and Vehicle</h1>
+    <div class="container-fluid" style="background-color: transparent; justify-content: center;">
+        <div class="d-flex" style="justify-content: center;">
+            <div class="d-inline-block requestText">Planet</div>
+            <div class="d-inline-block requestText" style="margin-left: 12%;">Vehicle</div>
+        </div>
+        <div class="d-flex" style="justify-content: center;">
+            <div class="d-inline-block" style="width: 150px; color: orangered;">
+                <ul>
+                    <li *ngFor="let planet of planet_names">{{planet}}</li>
+                </ul>
+            </div>
+            <div class="d-inline-block requestText" style="margin-left: 4%; width: 150px; color: orangered;">
+                <ul>
+                    <li *ngFor="let vehicle of vehicle_names">{{vehicle}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex" style="justify-content: center;">
+        <button id="submit" class="btn btn-outline-primary btn-submit" (click)="onSubmit()" [disabled]="isDisabled">Begin search</button>
+    </div>
+</div>
