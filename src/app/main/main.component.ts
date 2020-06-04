@@ -14,6 +14,7 @@ export class MainComponent implements OnInit {
   Planets;
   Vehicles;
   tokenData;
+  showImage:boolean = false;
   planetNameTemp:string;
   vehicleNameTemp:string;
   planet_names:any = [];
@@ -23,7 +24,6 @@ export class MainComponent implements OnInit {
   imgPlanet:any;
   imgVehicle:any;
   isVisible:string = "hidden";
-  isDisabled:boolean = true;
 
   constructor(
     private appData: AppDataService,
@@ -60,7 +60,6 @@ export class MainComponent implements OnInit {
     this.planet_names.push(this.planetNameTemp);
     this.vehicle_names.push(this.vehicleNameTemp);
     this.totalSelection++;
-    this.checkSubmit();
     this.resetSelection();
     }
     else{
@@ -120,23 +119,20 @@ export class MainComponent implements OnInit {
     this.timeTaken = this.timeTaken+time;
   }
 
-  checkSubmit() {
+  async onSubmit(){
     if(this.totalSelection == 4){
-      this.isDisabled = false;
+      const requestBody = {
+        token: this.tokenData.token,
+        planet_names:this.planet_names,
+        vehicle_names:this.vehicle_names};
+      var responseBody = await this.appData.findFalcone(requestBody);
+      responseBody = {response: responseBody, time: this.timeTaken};
+      this.router.navigate(['/end'], {
+        state: {responseBody}});
     }
     else{
-      this.isDisabled = true;
+      alert("Please select 4 planets and vehicles")
     }
-  }
 
-  async onSubmit(){
-    const requestBody = {
-      token: this.tokenData.token,
-      planet_names:this.planet_names,
-      vehicle_names:this.vehicle_names};
-    var responseBody = await this.appData.findFalcone(requestBody);
-    responseBody = {response: responseBody, time: this.timeTaken};
-    this.router.navigate(['/end'], {
-      state: {responseBody}});
   }
 }

@@ -8,12 +8,16 @@ export class AppDataService {
   constructor(private http: HttpClient) { }
 
   public async fetchPlanets() {
-    const planets = await this.http.get('https://findfalcone.herokuapp.com/planets').toPromise();
+    const planets = await this.http
+    .get('https://findfalcone.herokuapp.com/planets')
+    .toPromise();
     return planets;
   }
 
   public async fetchVehicles() {
-    const vehicles = await this.http.get('https://findfalcone.herokuapp.com/vehicles').toPromise();
+    const vehicles = await this.http
+    .get('https://findfalcone.herokuapp.com/vehicles')
+    .toPromise();
     return vehicles;
   }
 
@@ -24,7 +28,9 @@ export class AppDataService {
         'Accept' : 'application/json',
       })
     };
-    const token = await this.http.post('https://findfalcone.herokuapp.com/token', null, httpOptions).toPromise();
+    const token = await this.http
+    .post('https://findfalcone.herokuapp.com/token', null, httpOptions)
+    .toPromise();
     return token;
   }
 
@@ -35,7 +41,9 @@ export class AppDataService {
         'Content-Type' : 'application/json',
       })
     };
-    const responseBody  = await this.http.post('https://findfalcone.herokuapp.com/find', requestBody, httpOptions).toPromise();
+    const responseBody  = await this.http
+    .post('https://findfalcone.herokuapp.com/find', requestBody, httpOptions)
+    .toPromise();
     return responseBody;
   }
 }
