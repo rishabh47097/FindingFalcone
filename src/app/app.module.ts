@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -14,12 +13,6 @@ import { HeaderComponent } from './header/header.component';
 import { AppDataService } from './app-data.service';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-const appRoute: Routes = [
-  {path : '', component : StartupComponent},
-  {path : 'main', component : MainComponent},
-  {path : 'end', component : EndComponent}
-]
 
 @NgModule({
   declarations: [
@@ -35,7 +28,6 @@ const appRoute: Routes = [
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    RouterModule.forRoot(appRoute),
     NgbModule
   ],
   providers: [

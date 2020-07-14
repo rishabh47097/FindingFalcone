@@ -5,33 +5,27 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AppDataService {
+  baseurl='https://findfalcone.herokuapp.com/'
   constructor(private http: HttpClient) { }
 
-  public async fetchPlanets() {
-    const planets = await this.http
-    .get('https://findfalcone.herokuapp.com/planets')
+  public async fetchData(type) {
+    if(type=='token'){
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Accept' : 'application/json',
+        })
+      };
+      const token = await this.http
+      .post(this.baseurl+type, null, httpOptions)
+      .toPromise();
+      return token;
+    }
+    else{
+      const planets = await this.http
+    .get(this.baseurl+type)
     .toPromise();
     return planets;
-  }
-
-  public async fetchVehicles() {
-    const vehicles = await this.http
-    .get('https://findfalcone.herokuapp.com/vehicles')
-    .toPromise();
-    return vehicles;
-  }
-
-  public async fetchToken() {
-
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Accept' : 'application/json',
-      })
-    };
-    const token = await this.http
-    .post('https://findfalcone.herokuapp.com/token', null, httpOptions)
-    .toPromise();
-    return token;
+    }
   }
 
   public async findFalcone(requestBody) {
@@ -42,7 +36,7 @@ export class AppDataService {
       })
     };
     const responseBody  = await this.http
-    .post('https://findfalcone.herokuapp.com/find', requestBody, httpOptions)
+    .post(this.baseurl+requestBody.type, requestBody, httpOptions)
     .toPromise();
     return responseBody;
   }

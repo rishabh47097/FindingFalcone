@@ -35,13 +35,13 @@ export class MainComponent implements OnInit {
   }
 
   async apiServiceCall() {
-    this.Planets = await this.appData.fetchPlanets();
+    this.Planets = await this.appData.fetchData('planets');
     console.log(this.Planets);
 
-    this.Vehicles = await this.appData.fetchVehicles();
+    this.Vehicles = await this.appData.fetchData('vehicles');
     console.log(this.Vehicles);
 
-    this.tokenData = await this.appData.fetchToken();
+    this.tokenData = await this.appData.fetchData('token');
     console.log(this.tokenData);
   }
 
@@ -122,6 +122,7 @@ export class MainComponent implements OnInit {
   async onSubmit(){
     if(this.totalSelection == 4){
       const requestBody = {
+        type: 'find',
         token: this.tokenData.token,
         planet_names:this.planet_names,
         vehicle_names:this.vehicle_names};
